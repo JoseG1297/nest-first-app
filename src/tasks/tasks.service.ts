@@ -22,7 +22,11 @@ export class TasksService {
     }
 
     getTaskById(id: number): Task {
-        return this.tasks.find(task => task.id === id) || null;
+        let task = this.tasks.find(task => task.id === id);
+        if (!task) {
+            throw new Error(`Task with ID "${id}" not found`);
+        }
+        return task;
     }
 
     deleteTask(id: number): void {
