@@ -27,15 +27,17 @@ export class TasksController {
         return this.tasksService.createTask(title, description, status);
     }
 
-    @Put('/:id/status')
-    updateTaskStatus(
-        @Body('status') status: TaskStatus,
-        @Body('id') id: number
+    @Put(':id')
+    updateTask(
+        @Body('id') id: number,
+        @Body('title') title: string,
+        @Body('description') description: string,
+        @Body('status') status: TaskStatus
     ) {
-        return this.tasksService.updateTaskStatus(id, status);
+        return this.tasksService.updateTask(id, title, description, status);
     }
 
-    @Delete('/:id')
+    @Delete(':id')
     deleteTask(id: number) {
         return this.tasksService.deleteTask(id);
     }
