@@ -22,10 +22,9 @@ export class TasksService {
     }
 
     getTaskById(id: number): Task {
-        const task = this.tasks.find(task => task.id === id);
-        
+        const task = this.tasks.find((task) => task.id === id);
         if (!task) {
-            throw new Error(`Task with ID "${id}" not found`);
+          throw new Error(`Task with ID "${id}" not found`);
         }
         return task;
     }

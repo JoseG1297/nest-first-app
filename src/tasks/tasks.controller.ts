@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Put, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskStatus } from './task.entity';
 
@@ -13,8 +13,8 @@ export class TasksController {
         return this.tasksService.getAllTasks();
     }
 
-    @Get('/:id')
-    getTaskById(id: number) {
+    @Get(':id')
+    getTaskById(@Param('id', ParseIntPipe) id: number) {
         return this.tasksService.getTaskById(id);
     }
 
@@ -29,7 +29,7 @@ export class TasksController {
 
     @Put(':id')
     updateTask(
-        @Body('id') id: number,
+        @Param('id', ParseIntPipe) id: number,
         @Body('title') title: string,
         @Body('description') description: string,
         @Body('status') status: TaskStatus
@@ -38,7 +38,7 @@ export class TasksController {
     }
 
     @Delete(':id')
-    deleteTask(id: number) {
+    deleteTask(@Param('id', ParseIntPipe) id: number) {
         return this.tasksService.deleteTask(id);
     }
 }
