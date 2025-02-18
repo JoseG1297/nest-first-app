@@ -10,19 +10,20 @@ export class TasksService {
         return this.tasks;
     }
 
-    createTask(title: string, description: string): Task {
+    createTask(title: string, description: string, status: TaskStatus): Task {
         const task: Task = {
             id: this.tasks.length + 1,
             title,
             description,
-            status: TaskStatus.OPEN,
+            status
         };
         this.tasks.push(task);
         return task;
     }
 
     getTaskById(id: number): Task {
-        let task = this.tasks.find(task => task.id === id);
+        const task = this.tasks.find(task => task.id === id);
+        
         if (!task) {
             throw new Error(`Task with ID "${id}" not found`);
         }
